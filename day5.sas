@@ -1,0 +1,23 @@
+
+data kalle;
+  infile 'h:\adventofcode2022\Day5_1.txt' dsd dlm=' ' end=last truncover;
+  input x $ nbr x $ mfr x $ mto;
+  array s[9] $100 ;
+  retain s1-s9 ;
+  if _N_=1 then do;
+    s[1] = cat('C','F','B','L','D','P','Z','S');
+    s[2] = cat('B','W','H','P','G','V','N');
+    S[3] = cat('G','J','B','W','F');
+    s[4] = cat('S','C','W','L','F','N','J','G');
+    s[5] = cat('H','S','M','P','T','L','J','W');
+    s[6] = cat('S','F','G','W','C','B');
+    s[7] = cat('W','B','Q','M','P','T','H');
+    s[8] = cat('T','W','S','F');
+    s[9] = cat('R','C','N');
+  end;
+  nbrm=min(nbr,lengthn(s[mfr]));
+  s[mto]=cat(reverse(substr(s[mfr],1,nbrm)),s[mto]);
+*  s[mto]=cat(substr(s[mfr],1,nbrm),s[mto]);
+  s[mfr]=substr(s[mfr],nbrm+1);
+  if last then put s[*]=;
+run;
